@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
+Route::resource('/siswa', \App\Http\Controllers\StudentController::class);

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Posts - Ardiansyah Sulistyo</title>
+    <title>Data Siswa - Ardiansyah Sulistyo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -19,38 +19,42 @@
                     <h3 class="text-center my-4">Tutorial Laravel 10 untuk Pemula</h3>
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <h5 class="text-center"><a href="#">Ardiansyah Sulistyo</a></h5>
-                        <h5 class="ms-2 text-center"><a href="/siswa">Data Siswa</a></h5>
+                        <h5 class="ms-2 text-center"><a href="/posts">Data Post</a></h5>
                     </div>
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+                        <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">TAMBAH SISWA</a>
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
-                                    <th scope="col">GAMBAR</th>
-                                    <th scope="col">JUDUL</th>
-                                    <th scope="col">CONTENT</th>
-                                    <th scope="col">AKSI</th>
+                                <tr class="text-center">
+                                    <th scope="col">NIS</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">No Telepon</th>
+                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Foto Siswa</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($posts as $post)
-                                    <tr>
+                                @forelse ($students as $student)
+                                    <tr class="align-middle text-center">
+                                        <td>{{ $student->nis }}</td>
+                                        <td>{!! $student->nama !!}</td>
+                                        <td>{!! $student->no_telp !!}</td>
+                                        <td>{!! $student->alamat !!}</td>
                                         <td class="text-center">
-                                            <img src="{{ asset('/storage/posts/' . $post->image) }}" class="rounded"
+                                            <img src="{{ asset('/storage/siswa/' . $student->image) }}" class="rounded"
                                                 style="width: 150px">
                                         </td>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{!! $post->content !!}</td>
                                         <td class="text-center">
                                             <form
                                                 onsubmit="return confirm('Apakah Anda yakin ingin melakukan tindakan ini?');"
-                                                action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                                <a href="{{ route('posts.show', $post->id) }}"
+                                                action="{{ route('siswa.destroy', $student->id) }}" method="POST">
+                                                <a href="{{ route('siswa.show', $student->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('posts.edit', $post->id) }}"
+                                                <a href="{{ route('siswa.edit', $student->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -60,12 +64,12 @@
                                     </tr>
                                 @empty
                                     <div class="alert alert-danger">
-                                        Data Post belum Tersedia.
+                                        Data Siswa Belum Tersedia.
                                     </div>
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $posts->links() }}
+                        {{ $students->links() }}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function index(): View
     {
-        $posts = Post::orderBy('id', 'asc')->paginate(5);
+        $posts = Post::paginate(5);
         return view('posts.index', compact('posts'));
     }
 
@@ -24,7 +24,7 @@ class PostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:500000',
             'title' => 'required|min:5',
             'content' => 'required|min:10',
         ]);
@@ -58,7 +58,7 @@ class PostController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'image' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'image|mimes:jpeg,jpg,png|max:500000',
             'title' => 'required|min:5',
             'content' => 'required|min:10'
         ]);

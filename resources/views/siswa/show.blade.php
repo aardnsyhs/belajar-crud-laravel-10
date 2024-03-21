@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Detail Data Post - Ardiansyah Sulistyo</title>
+    <title>Detail Data Siswa - Ardiansyah Sulistyo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -17,11 +17,17 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <img src="{{ asset('storage/posts/' . $post->image) }}" class="w-100 rounded">
+                        <img src="{{ asset('storage/siswa/' . $students->image) }}" class="w-100 rounded">
                         <hr>
-                        <h4>{{ $post->title }}</h4>
+                        <h5>NIS: {{ $students->nis }}</h5>
                         <p class="tmt-3">
-                            {!! $post->content !!}
+                            Nama: {!! $students->nama !!}
+                        </p>
+                        <p class="tmt-3">
+                            No Telepon: {!! $students->no_telp !!}
+                        </p>
+                        <p class="tmt-3">
+                            {!! $students->alamat !!}
                         </p>
                     </div>
                 </div>
