@@ -12,9 +12,10 @@
 
 <body class="bg-dark text-white">
 
-    <div class="container mt-5 mb-5">
+    <div class="container mt-2 mb-5">
         <div class="row">
             <div class="col-md-12">
+                <h3><a href="{{ route('siswa.index') }}" class="text-white">Kembali</a></h3>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <form action="{{ route('siswa.update', $students->id) }}" method="POST"

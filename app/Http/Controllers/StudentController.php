@@ -12,7 +12,7 @@ class StudentController extends Controller
 {
     public function index(): View
     {
-        $students = Student::paginate(5);
+        $students = Student::all();
         return view('siswa.index', compact('students'));
     }
 
@@ -31,11 +31,9 @@ class StudentController extends Controller
             'image' => 'required|image|mimes:jpeg,jpg,png|max:500000'
         ]);
 
-        // Upload Image
         $image = $request->file('image');
         $image->storeAs('public/siswa', $image->hashName());
 
-        // Create Siswa
         Student::create([
             'nis' => $request->nis,
             'nama' => $request->nama,

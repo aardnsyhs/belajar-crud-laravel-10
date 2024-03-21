@@ -8,15 +8,17 @@
     <title>Data Siswa - Ardiansyah Sulistyo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
 </head>
 
 <body class="bg-dark text-white">
-    <div class="container mt-5">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tutorial Laravel 10 untuk Pemula</h3>
+                    <h3 class="text-center my-4">Data Siswa</h3>
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <h5 class="text-center"><a href="#">Ardiansyah Sulistyo</a></h5>
                         <h5 class="ms-2 text-center"><a href="/posts">Data Post</a></h5>
@@ -25,16 +27,16 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">TAMBAH SISWA</a>
-                        <table class="table table-bordered">
+                        <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">Tambah Siswa</a>
+                        <table id="example" class="table table-bordered table-hover" width="100%">
                             <thead>
-                                <tr class="text-center">
-                                    <th scope="col">NIS</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">No Telepon</th>
-                                    <th scope="col">Alamat</th>
-                                    <th scope="col">Foto Siswa</th>
-                                    <th scope="col">Aksi</th>
+                                <tr>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>No Telepon</th>
+                                    <th>Alamat</th>
+                                    <th>Foto Siswa</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,17 +50,17 @@
                                             <img src="{{ asset('/storage/siswa/' . $student->image) }}" class="rounded"
                                                 style="width: 150px">
                                         </td>
-                                        <td class="text-center">
+                                        <td>
                                             <form
                                                 onsubmit="return confirm('Apakah Anda yakin ingin melakukan tindakan ini?');"
                                                 action="{{ route('siswa.destroy', $student->id) }}" method="POST">
                                                 <a href="{{ route('siswa.show', $student->id) }}"
-                                                    class="btn btn-sm btn-dark">SHOW</a>
+                                                    class="btn btn-sm btn-dark">Detail</a>
                                                 <a href="{{ route('siswa.edit', $student->id) }}"
-                                                    class="btn btn-sm btn-primary">EDIT</a>
+                                                    class="btn btn-sm btn-primary">Ubah</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -69,14 +71,16 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $students->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -90,8 +94,11 @@
 
             toastr.error('{{ session('error') }}', 'GAGAL!');
         @endif
-    </script>
 
+        $('#example').DataTable({
+            responsive: true
+        });
+    </script>
 </body>
 
 </html>
